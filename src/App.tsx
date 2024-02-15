@@ -12,36 +12,37 @@ import { useTheme } from "./components/theme-provider";
 import moustache from "./../public/moustache.png";
 import propellor_hat from "./../public/propellor_hat.png";
 import cap_hat from "./../public/cap_hat.png";
+import glasses from "./../public/glasses.png";
+import { Input } from "@/components/ui/input";
 
-const props = [
-  moustache,
-  propellor_hat,
-  cap_hat,
-  propellor_hat,
-  propellor_hat,
-  propellor_hat,
-];
-
-const FLASK_ENDPOINT = "http://127.0.0.1:5000/";
+const props = [moustache, propellor_hat, cap_hat, glasses];
 
 export default function App() {
   const { theme } = useTheme();
+  const [flaskEndpoint, setFlaskEndpoint] = useState(
+    "http://127.0.0.1:5000"
+  );
   const [chosenPropIndex, setChosenPropIndex] = useState(1);
 
   const updatePropIndex = async (new_index: number) => {
     setChosenPropIndex(new_index + 1);
     await fetch(
-      `${FLASK_ENDPOINT}switch_prop?prop=${new_index}`
+      `${flaskEndpoint}/switch_prop?prop=${new_index}`
     );
   };
 
   return (
     <div className="px-10 pt-3 flex flex-col items-center gap-4 w-screen h-screen bg-white dark:bg-black">
       <ModeToggle />
+      <Input
+        defaultValue={flaskEndpoint}
+        onChange={(e) => setFlaskEndpoint(e.target.value)}
+        className="dark:text-white"
+      />
 
       <div className="h-4/5 w-4/5">
         <iframe
-          src={FLASK_ENDPOINT}
+          src={flaskEndpoint}
           className="w-full h-full"
         />
       </div>
