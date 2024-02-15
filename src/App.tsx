@@ -41,7 +41,7 @@ export default function App() {
 
       <div className="h-4/5 w-4/5">
         <iframe
-          src={"http://127.0.0.1:5000/"}
+          src={FLASK_ENDPOINT}
           className="w-full h-full"
         />
       </div>
