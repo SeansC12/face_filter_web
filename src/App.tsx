@@ -13,9 +13,19 @@ import moustache from "./../public/moustache.png";
 import propellor_hat from "./../public/propellor_hat.png";
 import cap_hat from "./../public/cap_hat.png";
 import glasses from "./../public/glasses.png";
+import cool_glasses from "./../public/cool_glasses.jpeg";
+import graduation_glasses from "./../public/graduation_glasses.jpeg";
 import { Input } from "@/components/ui/input";
+import { Label } from "./components/ui/label";
 
-const props = [moustache, propellor_hat, cap_hat, glasses];
+const props = [
+  moustache,
+  propellor_hat,
+  cap_hat,
+  glasses,
+  cool_glasses,
+  graduation_glasses,
+];
 
 export default function App() {
   const { theme } = useTheme();
@@ -34,11 +44,17 @@ export default function App() {
   return (
     <div className="px-10 pt-3 flex flex-col items-center gap-4 w-screen h-screen bg-white dark:bg-black">
       <ModeToggle />
-      <Input
-        defaultValue={flaskEndpoint}
-        onChange={(e) => setFlaskEndpoint(e.target.value)}
-        className="dark:text-white"
-      />
+      <div className="flex items-center justify-center flex-col w-full">
+        <Label className="text-white">
+          Flask IP Address (only change if it is different,
+          by default it should be correct)
+        </Label>
+        <Input
+          defaultValue={flaskEndpoint}
+          onChange={(e) => setFlaskEndpoint(e.target.value)}
+          className="dark:text-white w-max"
+        />
+      </div>
 
       <div className="h-4/5 w-4/5">
         <iframe
@@ -58,7 +74,9 @@ export default function App() {
                 <Card
                   className={`h-full ${
                     chosenPropIndex === index + 1
-                      ? "dark:bg-green-800"
+                      ? "dark:bg-green-800 bg-green-400"
+                      : index === 0
+                      ? "bg-gradient-to-r from-indigo-300 to-blue-500"
                       : ""
                   }`}
                 >
