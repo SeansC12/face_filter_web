@@ -32,7 +32,7 @@ export default function App() {
   const [flaskEndpoint, setFlaskEndpoint] = useState(
     "http://127.0.0.1:5000"
   );
-  const [chosenPropIndex, setChosenPropIndex] = useState(1);
+  const [chosenPropIndex, setChosenPropIndex] = useState(2);
 
   const updatePropIndex = async (new_index: number) => {
     setChosenPropIndex(new_index + 1);
@@ -42,24 +42,28 @@ export default function App() {
   };
 
   return (
-    <div className="px-10 pt-3 flex flex-col items-center gap-4 w-screen h-screen bg-white dark:bg-black">
-      <ModeToggle />
-      <div className="flex items-center justify-center flex-col w-full">
-        <Label className="text-white">
-          Flask IP Address (only change if it is different,
-          by default it should be correct)
-        </Label>
-        <Input
-          defaultValue={flaskEndpoint}
-          onChange={(e) => setFlaskEndpoint(e.target.value)}
-          className="dark:text-white w-max"
-        />
+    <div className="px-10 pt-3 flex flex-col items-center gap-1 w-screen h-screen bg-white dark:bg-black bg-[url('../public/sst_logo.png') bg-repeat">
+      <div className="flex gap-10">
+        <ModeToggle />
+        <div className="flex items-center justify-center flex-col w-full">
+          <Label className="text-white mb-2">
+            Flask IP Address (only change if it is
+            different, by default it should be correct)
+          </Label>
+          <Input
+            defaultValue={flaskEndpoint}
+            onChange={(e) =>
+              setFlaskEndpoint(e.target.value)
+            }
+            className="dark:text-white w-max"
+          />
+        </div>
       </div>
 
-      <div className="h-4/5 w-4/5">
+      <div className="flex items-center justify-center h-full w-full">
         <iframe
           src={flaskEndpoint}
-          className="w-full h-full"
+          className="w-3/4 h-full"
         />
       </div>
       <Carousel className="w-full max-w-sm">
@@ -67,10 +71,10 @@ export default function App() {
           {props.map((image, index) => (
             <CarouselItem
               key={index}
-              className="pl-1 md:basis-1/2 lg:basis-1/3 cursor-pointer"
+              className="md:basis-1/2 lg:basis-1/3 cursor-pointer"
               onClick={() => updatePropIndex(index)}
             >
-              <div className="p-1 h-[10rem]">
+              <div className="p-1 h-[5rem]">
                 <Card
                   className={`h-full ${
                     chosenPropIndex === index + 1
@@ -81,12 +85,9 @@ export default function App() {
                   }`}
                 >
                   <CardContent
-                    className={`flex flex-col aspect-square items-center justify-center p-6`}
+                    className={`flex aspect-square items-center justify-center`}
                   >
-                    <span className="text-base font-semibold">
-                      {index + 1}
-                    </span>
-                    <img src={image} />
+                    <img src={image} className="w-3/4" />
                   </CardContent>
                 </Card>
               </div>
